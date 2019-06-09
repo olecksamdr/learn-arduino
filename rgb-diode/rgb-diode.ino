@@ -1,11 +1,12 @@
-const int R_LED = 9;
+const int R_LED = 11;
 const int G_LED = 10;
-const int B_LED = 11;
+const int B_LED = 9;
 
 const int BUTTON = 2;
 
 boolean lastButton = LOW;
 boolean currentButton = LOW;
+
 int ledMode = 0;
 
 boolean debounce(int pin, boolean last) {
@@ -15,6 +16,8 @@ boolean debounce(int pin, boolean last) {
     delay(5);
     return digitalRead(pin);
   }
+
+  return last;
 }
 
 // todo: random color generation
@@ -22,48 +25,49 @@ void setMode(int mode) {
   switch(mode) {
     case 1:
       // red
-      digitalWrite(R_LED, HIGH);
-      digitalWrite(G_LED, LOW);
-      digitalWrite(B_LED, LOW);
+      analogWrite(R_LED, 40);
+      analogWrite(G_LED, 0);
+      analogWrite(B_LED, 0);
       break;
     case 2:
       // green
-      digitalWrite(R_LED, LOW);
-      digitalWrite(G_LED, HIGH);
-      digitalWrite(B_LED, LOW);
+      analogWrite(R_LED, 0);
+      analogWrite(G_LED, 40);
+      analogWrite(B_LED, 0);
       break;
     case 3:
       // blue
-      digitalWrite(R_LED, LOW);
-      digitalWrite(G_LED, LOW);
-      digitalWrite(B_LED, HIGH);
+      analogWrite(R_LED, 0);
+      analogWrite(G_LED, 0);
+      analogWrite(B_LED, 40);
       break;
     case 4:
       // purpule
-      analogWrite(R_LED, 127);
+      analogWrite(R_LED, 40);
       analogWrite(G_LED, 0);
-      analogWrite(B_LED, 127);
+      analogWrite(B_LED, 40);
       break;
     case 5:
       analogWrite(R_LED, 0);
-      analogWrite(G_LED, 127);
-      analogWrite(B_LED, 127);
+      analogWrite(G_LED, 40);
+      analogWrite(B_LED, 40);
       break;
     case 6:
-      analogWrite(R_LED, 127);
-      analogWrite(G_LED, 127);
+      analogWrite(R_LED, 40);
+      analogWrite(G_LED, 40);
       analogWrite(B_LED, 0);
       break;
     case 7:
       // white
-      analogWrite(R_LED, 85);
-      analogWrite(G_LED, 85);
-      analogWrite(B_LED, 85);
+      analogWrite(R_LED, 40);
+      analogWrite(G_LED, 40);
+      analogWrite(B_LED, 40);
       break;
     default:
       digitalWrite(R_LED, LOW);
       digitalWrite(G_LED, LOW);
       digitalWrite(B_LED, LOW);
+      break;
   }
 }
 
